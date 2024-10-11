@@ -1,0 +1,10 @@
+1. chức năng đăng nhập --> Done
+2. chức năng đăng xuất --> Done
+3. Hiển thị sản phẩm --> Done
+4. Pagination --> Done
+5. Chức năng thêm vào giỏ hàng --> Done
+6. chức năng filter --> Done
+7. chức năng tìm kiếm --> Done
+8. Slider
+9. About
+10. Footer
