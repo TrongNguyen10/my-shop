@@ -1,11 +1,11 @@
-// src/components/UserMenu.tsx
 
 import React, { useState } from 'react';
 import LoginForm from './loginForm'; // Đảm bảo bạn đã tạo component LoginForm
-import { Menu, MenuItem } from '@mui/material';
+import { Link, Menu, MenuItem } from '@mui/material';
 import { Login, Logout } from '@mui/icons-material';
+
 interface userMenuProps {
-    open: any; // Trạng thái hiển thị của Popover
+    open: any; // Trạng thái hiển thị của Menu
     onClose: () => void;
 }
 
@@ -37,10 +37,6 @@ const UserMenu: React.FC<userMenuProps> = ({ open, onClose }) => {
         display: 'none'
     }
 
-    const handleAdminClick = () => {
-        // Chuyển sang trang Admin (hoặc thực hiện hành động tương ứng)
-    };
-
     return (
         <>
             <Menu
@@ -54,7 +50,7 @@ const UserMenu: React.FC<userMenuProps> = ({ open, onClose }) => {
             >
                 <MenuItem sx={loginItemStyle} onClick={handleLoginClick}>Đăng nhập <Login /></MenuItem>
                 <MenuItem sx={logoutItemStyle} onClick={handleLogoutClick}>Đăng xuất <Logout /></MenuItem>
-                <MenuItem onClick={handleAdminClick}>Quản lí hệ thống</MenuItem>
+                <MenuItem><Link sx={{textDecoration: 'none', color: '#000'}} href='admin' target='_blank'>Quản lí hệ thống</Link></MenuItem>
             </Menu>
             <LoginForm open={showLoginForm} onClose={() => setShowLoginForm(false)} setLoggedIn={setLoggedIn} loggedIn={loggedIn} /> {/* Hiển thị form Đăng nhập khi cần */}
         </>

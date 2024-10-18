@@ -1,8 +1,19 @@
-// Cart.tsx
 
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemText, IconButton, Box } from '@mui/material';
 import { Close, Add, Remove, Delete } from '@mui/icons-material';
+
+const productTitleStyle = {
+    margin: 0,
+    lineHeight: '2rem',
+    maxHeight: '4rem',
+    flex: 1,
+    overflow: 'hidden',
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    WebkitLineClamp: 2,
+    textAlign: 'left',
+}
 
 interface cartProduct {
     id: number;
@@ -53,19 +64,8 @@ const Cart: React.FC<CartProps> = ({ cartProducts, open, onClose, setAmount, set
 
     const cartTotal = cartProducts?.reduce((total, cartProduct) => total + getcartProductTotal(cartProduct.id), 0);
 
-    const productTitleStyle = {
-        margin: 0,
-        lineHeight: '2rem',
-        maxHeight: '4rem',
-        flex: 1,
-        overflow: 'hidden',
-        display: '-webkit-box',
-        WebkitBoxOrient: 'vertical',
-        WebkitLineClamp: 2,
-        textAlign: 'left',
-    }
     // create unique cartProducts array without duplicated elements 
-    let uniqueCartProducts = cartProducts.filter((value, index, self) =>
+    let uniqueCartProducts = cartProducts?.filter((value, index, self) =>
         index === self.findIndex((t) => (
             t.id === value.id
         ))
@@ -73,7 +73,7 @@ const Cart: React.FC<CartProps> = ({ cartProducts, open, onClose, setAmount, set
 
     return (
         <Drawer anchor="right" open={open} onClose={onClose}>
-            <div style={{ width: 350 }}>
+            <div style={{ width: 400 }}>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
                     <IconButton onClick={onClose}>
                         <Close />
@@ -83,36 +83,40 @@ const Cart: React.FC<CartProps> = ({ cartProducts, open, onClose, setAmount, set
                 {cartProducts?.length === 0 ? <p style={{ marginLeft: 20 }}>Chưa có sản phẩm nào .</p> : null}
                 <List>
                     {uniqueCartProducts?.map((cartProduct) => (
-                        <ListItem className={`cartItem-${cartProduct.id}`} key={cartProduct.id}>
+                        <ListItem>
                             <Box component={'img'} sx={{
                                 height: 35,
                                 width: 30,
-                                marginRight: 2
+                                mr: 1.5
                             }} src={cartProduct.image} />
-                            <div>
-                                <ListItemText
-                                    primary={cartProduct.title}
-                                    sx={productTitleStyle}
-                                />
-                                <ListItemText
-                                    secondary={`$${cartProduct.price}`}
-                                />
+                            <div style={{ display: 'flex', flex: 1, justifyContent: 'space-between' }}>
+                                <div>
+                                    <ListItemText
+                                        primary={cartProduct.title}
+                                        sx={productTitleStyle}
+                                    />
+                                    <ListItemText
+                                        secondary={`$${cartProduct.price}`}
+                                    />
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <IconButton onClick={() => handleDecrease(cartProduct)}>
+                                        <Remove sx={{ color: '#000' }} />
+                                    </IconButton>
+                                    <div>{itemCounter(cartProducts, cartProduct)}</div>
+                                    <IconButton onClick={() => handleIncrease(cartProduct)}>
+                                        <Add sx={{ color: '#000' }} />
+                                    </IconButton>
+                                    <IconButton onClick={() => handleRemove(cartProduct)}>
+                                        <Delete sx={{ color: '#000' }} />
+                                    </IconButton>
+                                </div>
                             </div>
-                            <IconButton onClick={() => handleDecrease(cartProduct)}>
-                                <Remove />
-                            </IconButton>
-                            <div>{itemCounter(cartProducts, cartProduct)}</div>
-                            <IconButton onClick={() => handleIncrease(cartProduct)}>
-                                <Add />
-                            </IconButton>
-                            <IconButton onClick={() => handleRemove(cartProduct)}>
-                                <Delete />
-                            </IconButton>
                         </ListItem>
                     ))}
                 </List>
                 <div style={{ textAlign: 'right', padding: '10px' }}>
-                    <strong>Tổng cộng: ${cartTotal.toFixed(2)}</strong>
+                    <strong>Tổng cộng: ${cartTotal?.toFixed(2)}</strong>
                 </div>
             </div>
         </Drawer>

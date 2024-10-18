@@ -5,6 +5,6 @@
 5. Chức năng thêm vào giỏ hàng --> Done
 6. chức năng filter --> Done
 7. chức năng tìm kiếm --> Done
-8. Slider
+8. Slider --> Done
 9. About
 10. Footer
