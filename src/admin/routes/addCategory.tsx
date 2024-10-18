@@ -74,7 +74,7 @@ const AddCategory: React.FC = () => {
                             </Grid2>
                             <Grid2 size={6}>
                                 <p>Price Range (unit: $) </p>
-                                <div style={{display: 'flex', alignItems: 'center'}}>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
                                     <input
                                         className='inputTag'
                                         placeholder="From"
@@ -83,7 +83,7 @@ const AddCategory: React.FC = () => {
                                         value={category.minPrice}
                                         onChange={handleInputChange}
                                     />
-                                    <span style={{margin: '0 1rem'}}>-</span>
+                                    <span style={{ margin: '0 1rem' }}>-</span>
                                     <input
                                         className='inputTag'
                                         placeholder="To"
@@ -120,6 +120,9 @@ const AddCategory: React.FC = () => {
 
                         </Grid2>
                     </Card>
+                    <Button sx={{ float: 'right', mt: 1.5 }} variant="contained" color="success" onClick={handleSaveCategory}>
+                        Save Category
+                    </Button>
                 </Grid2>
                 <Grid2 size={4}>
                     <Card variant='outlined' sx={cardStyle}>
@@ -128,9 +131,6 @@ const AddCategory: React.FC = () => {
                     </Card>
                 </Grid2>
             </Grid2>
-            <Button sx={{ float: 'right' }} variant="contained" color="success" onClick={handleSaveCategory}>
-                Save Category
-            </Button>
         </div>
     );
 };

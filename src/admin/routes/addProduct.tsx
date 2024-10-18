@@ -169,6 +169,9 @@ const AddProduct: React.FC = () => {
 
                         </Grid2>
                     </Card>
+                    <Button sx={{float: 'right', mt: 1.5}} variant="contained" color="success" onClick={handleSaveProduct}>
+                        Save Product
+                    </Button>
                 </Grid2>
                 <Grid2 size={4}>
                     <Card variant='outlined' sx={cardStyle}>
@@ -177,9 +180,6 @@ const AddProduct: React.FC = () => {
                     </Card>
                 </Grid2>
             </Grid2>
-            <Button sx={{float: 'right'}} variant="contained" color="success" onClick={handleSaveProduct}>
-                Save Product
-            </Button>
         </div>
     );
 };
