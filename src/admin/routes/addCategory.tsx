@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Grid2, TextareaAutosize } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import { fetchCategories } from '../../api'
+import { Button, Card, Grid2 } from '@mui/material';
 import ImageDropzone from '../components/imageDropzone';
 
 const addCategoryStyle = {
@@ -47,8 +45,12 @@ const AddCategory: React.FC = () => {
 
     const handleInputChange = (event: any) => {
         const { name, value } = event.target;
-        setCategory((prevCategory) => ({ ...prevCategory, [name]: value }));
+        setCategory((prevCategory) => ({ ...prevCategory, [name]: name == 'name' ? value : value * 1 }));
     };
+
+    const setImageUrl = (url: string) => {
+        setCategory((prevCategory) => ({...prevCategory, image: url }));
+    }
 
     const handleSaveCategory = () => {
         console.log('Category saved:', category);
@@ -67,8 +69,9 @@ const AddCategory: React.FC = () => {
                                 <input
                                     className='inputTag'
                                     placeholder="Category name"
-                                    name="category-name"
-                                    value={category.name}
+                                    name="name"
+                                    type='text'
+                                    defaultValue={category.name}
                                     onChange={handleInputChange}
                                 />
                             </Grid2>
@@ -78,42 +81,42 @@ const AddCategory: React.FC = () => {
                                     <input
                                         className='inputTag'
                                         placeholder="From"
-                                        name="min-price"
+                                        name="minPrice"
                                         type="number"
-                                        value={category.minPrice}
+                                        defaultValue={category.minPrice}
                                         onChange={handleInputChange}
                                     />
                                     <span style={{ margin: '0 1rem' }}>-</span>
                                     <input
                                         className='inputTag'
                                         placeholder="To"
-                                        name="max-price"
+                                        name="maxPrice"
                                         type="number"
-                                        value={category.maxPrice}
+                                        defaultValue={category.maxPrice}
                                         onChange={handleInputChange}
                                     />
                                 </div>
                             </Grid2>
 
                             <Grid2 size={6}>
-                                <p>Total Products (unit: items)</p>
+                                <p>Total Products</p>
                                 <input
                                     className='inputTag'
                                     placeholder="total-products"
-                                    name="total-products"
+                                    name="totalProducts"
                                     type="number"
-                                    value={category.totalProducts}
+                                    defaultValue={category.totalProducts}
                                     onChange={handleInputChange}
                                 />
                             </Grid2>
                             <Grid2 size={6}>
-                                <p>Total Quantity</p>
+                                <p>Total Quantity (unit: items)</p>
                                 <input
                                     className='inputTag'
                                     placeholder="Quantity"
-                                    name="quantity"
+                                    name="totalQuantity"
                                     type="number"
-                                    value={category.totalQuantity}
+                                    defaultValue={category.totalQuantity}
                                     onChange={handleInputChange}
                                 />
                             </Grid2>
@@ -127,7 +130,7 @@ const AddCategory: React.FC = () => {
                 <Grid2 size={4}>
                     <Card variant='outlined' sx={cardStyle}>
                         <h3 style={{ marginTop: 0 }}>Category Image</h3>
-                        <ImageDropzone />
+                        <ImageDropzone passImageUrl={setImageUrl}/>
                     </Card>
                 </Grid2>
             </Grid2>

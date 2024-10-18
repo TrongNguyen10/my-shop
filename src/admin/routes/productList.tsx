@@ -11,9 +11,9 @@ const productListStyle = {
 
 const tableStyle = {
     maxHeight: 500,
-    // table row
+    // table rows
     '& .css-10ukr6t-MuiTableCell-root': {
-        color: '#aab8c1'
+        color: '#aab8c1',
     },
     // table header
     '& .css-1u6ck2-MuiTableCell-root': {
@@ -54,7 +54,7 @@ const ProductList: React.FC = () => {
         <div style={productListStyle}>
             <h2>Products List</h2>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 30 }}>
-                <div style={{ display: 'flex', alignItems: 'center', transform: 'translateX(-1.5rem)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', transform: 'translateX(-2.5rem)' }}>
                     <IconButton onClick={(e) => searchProducts(e, searchValue)} sx={{ transform: 'translateX(2.5rem)', color: '#fff' }}>
                         <Search />
                     </IconButton>
@@ -90,7 +90,7 @@ const ProductList: React.FC = () => {
                                 <TableCell>{product.title}</TableCell>
                                 <TableCell>{product.description}</TableCell>
                                 <TableCell>${product.price.toFixed(2)}</TableCell>
-                                <TableCell>{product.rating.count}</TableCell>
+                                <TableCell>{product.rating.count} items</TableCell>
                                 <TableCell>{product.category}</TableCell>
                                 <TableCell>
                                     <div style={{ display: 'flex' }}>

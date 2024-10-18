@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { fetchProducts, fetchCategories } from '../../api'
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button, IconButton } from '@mui/material';
 import { Visibility, Edit, Delete, Search } from '@mui/icons-material'
@@ -11,7 +11,7 @@ const categoryListStyle = {
 
 const tableStyle = {
     maxHeight: 500,
-    // table row
+    // table rows
     '& .css-10ukr6t-MuiTableCell-root': {
         color: '#aab8c1',
         textAlign: 'center'
@@ -36,6 +36,7 @@ const CategoryList: React.FC = () => {
 
     const [searchValue, setSearchValue] = React.useState('')
     const [categoriesData, setCategoriesData] = React.useState<object[]>([])
+    const [allCategoriesData, setAllCategoriesData] = React.useState([])
 
     const handleSetSearchValue = (event: any) => {
         setSearchValue(event.target.value)
@@ -46,27 +47,28 @@ const CategoryList: React.FC = () => {
     }
 
     const searchCategory = (event: any, value: string) => {
-        var filteredData = value.trim() ? getAllCategoriesData()?.filter((dataArr: any) => dataArr[0]?.category.includes(value.trim())) : getAllCategoriesData()
+        var filteredData = value.trim() ? allCategoriesData?.filter((dataArr: any) => dataArr[0]?.category.includes(value.trim())) : allCategoriesData
         setCategoriesData(filteredData)
     }
 
     useEffect(() => {
         setCategoriesData(getAllCategoriesData())
+        setAllCategoriesData(getAllCategoriesData())
     }, [categories])
 
-    const getAllCategoriesData = () =>{
+    const getAllCategoriesData = () => {
         return categories?.map((category: any) => {
             return products?.filter((product: any) => product?.category == category)
         })
     }
 
     const handleAveragePrice = (data: any) => {
-        data.sort(function (a: any, b: any) { return a.price - b.price });
+        data?.sort(function (a: any, b: any) { return a.price - b.price });
         return `$${data[0].price} - $${data[data.length - 1].price}`;
     }
 
     const handleTotalQuantity = (data: any) => {
-        var totalQuantity = data.reduce((total: any, item: any) => {
+        var totalQuantity = data?.reduce((total: any, item: any) => {
             return total + item.rating.count
         }, 0)
         return totalQuantity
@@ -76,7 +78,7 @@ const CategoryList: React.FC = () => {
         <div style={categoryListStyle}>
             <h2>Categories List</h2>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 30 }}>
-                <div style={{ display: 'flex', alignItems: 'center', transform: 'translateX(-1.5rem)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', transform: 'translateX(-2.5rem)' }}>
                     <IconButton onClick={(e) => searchCategory(e, searchValue)} sx={{ transform: 'translateX(2.5rem)', color: '#fff' }}>
                         <Search />
                     </IconButton>
@@ -101,13 +103,13 @@ const CategoryList: React.FC = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {categoriesData?.map((item: any, index: number) => (
+                        {!!categoriesData == true ? categoriesData?.map((item: any, index: number) => (
                             <TableRow>
                                 <TableCell>{index + 1}</TableCell>
-                                <TableCell>{item[0]?.category || null}</TableCell>
+                                <TableCell>{item[0].category}</TableCell>
                                 <TableCell>{handleAveragePrice(item)}</TableCell>
-                                <TableCell>{item.length} items</TableCell>
-                                <TableCell>{handleTotalQuantity(item)}</TableCell>
+                                <TableCell>{item.length} products</TableCell>
+                                <TableCell>{handleTotalQuantity(item)} items</TableCell>
                                 <TableCell>
                                     <div>
                                         <IconButton>
@@ -122,7 +124,7 @@ const CategoryList: React.FC = () => {
                                     </div>
                                 </TableCell>
                             </TableRow>
-                        ))}
+                        )) : null}
                     </TableBody>
                 </Table>
             </TableContainer>

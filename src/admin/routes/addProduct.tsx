@@ -59,17 +59,24 @@ const AddProduct: React.FC = () => {
 
     const handleInputChange = (event: any) => {
         const { name, value } = event.target;
-        setProduct((prevProduct) => ({ ...prevProduct, [name]: value }));
-    };
-
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            // Upload the file and get the image URL
-            const imageUrl = 'https://example.com/uploaded-image-url';
-            setProduct((prevProduct) => ({ ...prevProduct, image: imageUrl }));
+        if (name === 'rate' || name === 'count') {
+            // console.log(name)
+            // Gán giá trị cho trường con "rate" hoặc "count"
+            setProduct((prevProduct) => ({
+                ...prevProduct,
+                rating: {
+                    ...prevProduct.rating,
+                    [name]: value * 1, // Chuyển giá trị sang số
+                },
+            }));
+        } else {
+            setProduct((prevProduct) => ({ ...prevProduct, [name]: name == 'price' ? value * 1 : value }));
         }
     };
+
+    const setImageUrl = (imageUrl: string) => {
+        setProduct((prevProduct) => ({ ...prevProduct, image: imageUrl }));
+    }
 
     const handleSaveProduct = () => {
         console.log('Product saved:', product);
@@ -117,17 +124,16 @@ const AddProduct: React.FC = () => {
                                             {category}
                                         </option>
                                     ))}
-                                    {/* Add other category options */}
                                 </select>
                             </Grid2>
                             <Grid2 size={6}>
                                 <p>Rating</p>
                                 <input
                                     className='inputTag'
-                                    placeholder="Rating"
-                                    name="rating"
+                                    placeholder="Rate"
+                                    name="rate"
                                     type="number"
-                                    value={product.rating.rate}
+                                    defaultValue={product.rating.rate}
                                     onChange={handleInputChange}
                                 />
                             </Grid2>
@@ -139,7 +145,7 @@ const AddProduct: React.FC = () => {
                                     placeholder="Price"
                                     name="price"
                                     type="number"
-                                    value={product.price}
+                                    defaultValue={product.price}
                                     onChange={handleInputChange}
                                 />
                             </Grid2>
@@ -147,10 +153,10 @@ const AddProduct: React.FC = () => {
                                 <p>Quantity</p>
                                 <input
                                     className='inputTag'
-                                    placeholder="Quantity"
-                                    name="quantity"
+                                    placeholder="Count"
+                                    name="count"
                                     type="number"
-                                    value={product.rating.count}
+                                    defaultValue={product.rating.count}
                                     onChange={handleInputChange}
                                 />
                             </Grid2>
@@ -169,14 +175,14 @@ const AddProduct: React.FC = () => {
 
                         </Grid2>
                     </Card>
-                    <Button sx={{float: 'right', mt: 1.5}} variant="contained" color="success" onClick={handleSaveProduct}>
+                    <Button sx={{ float: 'right', mt: 1.5 }} variant="contained" color="success" onClick={handleSaveProduct}>
                         Save Product
                     </Button>
                 </Grid2>
                 <Grid2 size={4}>
                     <Card variant='outlined' sx={cardStyle}>
                         <h3 style={{ marginTop: 0 }}>Product Image</h3>
-                        <ImageDropzone />
+                        <ImageDropzone passImageUrl={setImageUrl} />
                     </Card>
                 </Grid2>
             </Grid2>
