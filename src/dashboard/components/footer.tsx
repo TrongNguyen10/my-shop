@@ -11,9 +11,16 @@ const theme = createTheme({
     }
 })
 
+const footerStyle = {
+    backgroundColor: '#212121',
+    color: 'white',
+    height: 400,
+    padding: '3rem 0',
+}
+
 const Footer: React.FC = () => {
     return (
-        <div style={{ backgroundColor: '#212121', color: 'white', height: 400, padding: '3rem 0' }}>
+        <div style={footerStyle}>
             <ThemeProvider theme={theme}>
                 <Grid sx={{ maxWidth: 1200, m: 'auto' }} container spacing={3}>
                     <Grid size={3}>

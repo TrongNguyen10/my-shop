@@ -1,10 +1,19 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Badge, AppBar, Toolbar, Typography, IconButton, Input } from '@mui/material';
 import { Person, Search, ShoppingCart } from '@mui/icons-material';
 import Cart from "./cart"
 import UserMenu from "./userMenu"
 import { Link } from 'react-scroll';
+
+const toolBarStyle = {
+    '& .MuiToolbar-root': {
+        padding: '0 !important'
+    },
+    width: "100%", 
+    maxWidth: "1260px", 
+    margin: "0 auto"
+}
 
 const Header = (props: any) => {
     const [cartOpen, setCartOpen] = useState(false);
@@ -24,7 +33,10 @@ const Header = (props: any) => {
     }
 
     const pressEnterToSearch = (event: any) => {
-        if (event.key == 'Enter') props.searchProducts(event, searchValue)
+        if (event.key == 'Enter') props.searchProducts()
+    }
+    const handleSearchProducts = () => {
+        props.searchProducts()
     }
 
     const CartProps = {
@@ -37,7 +49,7 @@ const Header = (props: any) => {
 
     return (
         <AppBar style={{ backgroundColor: '#212121', position: 'sticky', boxShadow: 'none' }}>
-            <Toolbar style={{ width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
+            <Toolbar sx={toolBarStyle}>
                 <Link to="#" smooth={true} duration={500}>
                     <img style={{ maxHeight: 40, marginRight: 20 }} src="src/dashboard/assets/logo3.png" alt="" />
                 </Link>
@@ -46,7 +58,7 @@ const Header = (props: any) => {
                 </Typography>
                 <div style={{ display: "flex", flex: 1, margin: "0 20%" }}>
                     <Input onKeyUp={pressEnterToSearch} onChange={handleSetSearchValue} value={searchValue} sx={{ color: "white", flex: 1 }} placeholder="Search Products..." />
-                    <IconButton onClick={(event) => props.searchProducts(event, searchValue)} color="inherit">
+                    <IconButton onClick={handleSearchProducts} color="inherit">
                         <Search />
                     </IconButton>
                 </div>

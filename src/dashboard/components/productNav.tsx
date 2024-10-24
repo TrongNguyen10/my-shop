@@ -1,7 +1,9 @@
 
 // Include Filter and Pagination components
 import React, { useEffect, useState } from 'react';
-import { Select, MenuItem, Pagination, SelectChangeEvent, Button, Stack, TextField } from '@mui/material';
+import { Select, MenuItem, Pagination, SelectChangeEvent, Button, Stack } from '@mui/material';
+import { fetchCategories } from '../../api';
+import { useQuery } from '@tanstack/react-query';
 
 const productNavStyle = {
     backgroundColor: '#ededed',
@@ -16,10 +18,14 @@ const productNavStyle = {
 const ProductNavBar = (props: any) => {
     const [priceOrder, setPriceOrder] = useState('price-normal');
     const [category, setCategory] = useState('category-all')
-    const [categories, setCategories] = useState<string[]>([]);
+    const [categories, setCategories] = useState<object[]>([]);
 
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
+
+    const query = useQuery({
+        queryKey: ['getCategories'], queryFn: fetchCategories
+    });
 
     const handleSelectPrice = (event: SelectChangeEvent) => {
         setPriceOrder(event.target.value as string);
@@ -67,33 +73,32 @@ const ProductNavBar = (props: any) => {
     };
 
     useEffect(() => {
-        // Fetch data from API
-        fetch('https://fakestoreapi.com/products/categories')
-            .then((response) => response.json())
-            .then((data) => setCategories(data));
-    }, []);
+        if (query.data) setCategories(query.data);
+    }, [query.data]);
 
     return (
         <div style={productNavStyle}>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
                 <p style={{ marginRight: 15 }}>Danh mục :</p>
                 <Select
+                    sx={{height: 50}}
                     labelId="category-label"
                     id="category-select"
                     value={category}
                     onChange={handleSelectCategory}
                 >
                     <MenuItem value="category-all">Tất cả</MenuItem>
-                    {categories.map((category) => (
-                        <MenuItem key={category} value={category}>
-                            {category}
+                    {categories?.map((category: any) => (
+                        <MenuItem key={category.id} value={category.name}>
+                            {category.name}
                         </MenuItem>
                     ))}
                 </Select>
             </div>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
                 <p style={{ marginRight: 15 }}>Khoảng giá :</p>
                 <Select
+                    sx={{height: 50}}
                     labelId="price-order-label"
                     id="price-order-select"
                     value={priceOrder}

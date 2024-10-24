@@ -15,7 +15,7 @@ const Slider: React.FC = () => {
         <div style={{ backgroundColor: '#f3f2ee', padding: '2rem 5rem' }} className="slider-container">
             <Carousel interval={3000}>
                 {images.map((image, index) => (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: 'auto', maxWidth: 1200 }}>
+                    <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: 'auto', maxWidth: 1200 }}>
                         <div style={{ marginLeft: 100 ,maxWidth: 500 }}>
                             <Typography> <h3 style={{color: 'red', margin: 0}}>Summer collection</h3> <br />
                                 <h1 style={{margin: 0}}>Save up to 50%</h1> <br />

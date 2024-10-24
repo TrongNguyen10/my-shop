@@ -6,5 +6,16 @@
 6. chức năng filter --> Done
 7. chức năng tìm kiếm --> Done
 8. Slider --> Done
-9. About
-10. Footer
+9. About --> Done
+10. Footer --> Done
+11. Fix Login --> Done
+12. Add Product --> Done
+13. Add Category --> Done
+14. edit Product --> Done
+15. edit Category --> Done
+16. check empty value add, update product, category --> Done
+17. View Product --> Done
+18. Breadcrumb --> Done
+19. Change Route path --> Done
+20. Add to Cart from view product --> Done
+21. save localstorage

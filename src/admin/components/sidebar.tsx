@@ -8,8 +8,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Sidebar = (props: any) => {
 
-    // let navigate = useNavigate()
-
     const [expanded, setExpanded] = React.useState<string | false>('panel1');
 
     const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
@@ -78,7 +76,7 @@ const Sidebar = (props: any) => {
                     <img style={{ maxHeight: 35, marginRight: 20 }} src="src/dashboard/assets/logo3.png" alt="" />
                     <ListItemText primary="NDT Admin" />
                 </ListItem>
-                {/* Expandable Products section */}
+
                 <ListItem>
                     <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -89,17 +87,17 @@ const Sidebar = (props: any) => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <List>
-                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/productList'>
+                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/admin/productList'>
                                     <ListItem>
                                         <ListItemText primary="List" />
                                     </ListItem>
                                 </NavLink>
-                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/addProduct'>
+                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/admin/addProduct'>
                                     <ListItem>
                                         <ListItemText primary="Create" />
                                     </ListItem>
                                 </NavLink>
-                                {/* Add more items as needed */}
+
                             </List>
                         </AccordionDetails>
                     </Accordion>
@@ -114,17 +112,17 @@ const Sidebar = (props: any) => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <List>
-                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/categoryList'>
+                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/admin/categoryList'>
                                     <ListItem>
                                         <ListItemText primary="List" />
                                     </ListItem>
                                 </NavLink>
-                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/addCategory'>
+                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/admin/addCategory'>
                                     <ListItem>
                                         <ListItemText primary="Create" />
                                     </ListItem>
                                 </NavLink>
-                                {/* Add more items as needed */}
+
                             </List>
                         </AccordionDetails>
                     </Accordion>

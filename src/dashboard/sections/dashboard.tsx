@@ -1,23 +1,20 @@
 
-import { fetchProducts } from '../../api';
+import { productsAPI } from '../../api';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState, ChangeEvent, useEffect } from 'react';
-import { Card, CardMedia, CardContent, Typography, IconButton } from '@mui/material';
-import Grid from '@mui/material/Grid2';
-import AddShoppingCart from '@mui/icons-material/AddShoppingCart';
 import Header from '../components/header';
-import ProductNavBar from '../components/productNav';
-import Navbar from '../components/navbar';
-import Slider from '../components/slider';
-import Contact from './contact';
-import AboutUs from './about';
-import Footer from './footer';
+import Footer from '../components/footer';
+import axios from 'axios';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import ProductInfo from './productInfo';
+import DashboardBody from './dashboardBody';
+import Admin from '../../admin/admin';
 
-const cardStyle = {
+export const cardStyle = {
     paddingTop: '100%',
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
 }
 const productTitleStyle = {
     fontSize: '1.2rem',
@@ -34,28 +31,35 @@ const Dashboard: React.FC = () => {
 
     const [priceOrder, setPriceOrder] = useState('price-normal')
 
+    const [category, setCategory] = useState('category-all')
     const [categoryProducts, setCategoryProducts] = useState([])
 
     const [searchedProducts, setSearchedProducts] = useState([])
     const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
-        if(!searchValue) setSearchedProducts([])
+        if (!searchValue) setSearchedProducts([])
     }, [searchValue])
 
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
 
-    const { data } = useQuery({
-        queryKey: ['getProducts'], queryFn: fetchProducts
+    const query = useQuery({
+        queryKey: ['getProducts'], queryFn: async () => {
+            const response = await axios.get(productsAPI)
+            return response.data
+        }
     });
 
+    const [allProducts, setAllProducts] = useState([]);
+    // products: biến dùng để tính displayedProducts => hiển thị ra màn hình
     const [products, setProducts] = useState<object[]>([]);
     useEffect(() => {
-        if (data) {
-            setProducts(data);
+        if (query.data) {
+            setProducts(query.data);
+            setAllProducts(query.data)
         }
-    }, [data]);
+    }, [query.data]);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
     const productsPerPage = 8;
@@ -65,32 +69,23 @@ const Dashboard: React.FC = () => {
     const [amount, setAmount] = useState(0)
 
     const handleAddToCart = (product: any) => {
-        cartProducts?.push({
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            image: product.image
-        })
+        Array.isArray(product) ? cartProducts?.push(...product) : cartProducts?.push(product)
         setCartProducts(cartProducts)
         setAmount(cartProducts?.length)
+        console.log(cartProducts)
     }
 
     const handlePageChange = (event: ChangeEvent, page: number = 1) => {
         setCurrentPage(page);
     };
 
-    let displayedProducts = products?.slice(
-        (currentPage - 1) * productsPerPage,
-        currentPage * productsPerPage
-    );
-
     var filteredProducts = [];
     const filterByCategory = (category: string) => {
-
+        setCategory(category)
         if (category == 'category-all') {
-            filteredProducts = data
+            filteredProducts = allProducts
         } else {
-            filteredProducts = data.filter((product: any) => {
+            filteredProducts = allProducts.filter((product: any) => {
                 return product.category == category
             })
         }
@@ -113,6 +108,10 @@ const Dashboard: React.FC = () => {
             }
         }
         setProducts(filteredProducts)
+        setDisplayedProducts(products?.slice(
+            (currentPage - 1) * productsPerPage,
+            currentPage * productsPerPage
+        ))
     }
 
     const filterByPriceRange = (minPrice: any, maxPrice: any, arr: any) => {
@@ -136,11 +135,16 @@ const Dashboard: React.FC = () => {
         filterByPrice(priceOrder, filteredProducts)
     }
 
-    const searchProducts = (event: any, value: string) => {
+    const searchProducts = () => {
 
-        filteredProducts = data.filter((product: any) => {
-            return product.title.toLowerCase().includes(value.toLowerCase()) ||
-                product.category.toLowerCase().includes(value.toLowerCase())
+        if (!searchValue.trim()) {
+            filterByCategory(category)
+            return
+        }
+
+        filteredProducts = allProducts.filter((product: any) => {
+            return product.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+                product.category.toLowerCase().includes(searchValue.toLowerCase())
         })
 
         setSearchedProducts(filteredProducts)
@@ -151,6 +155,17 @@ const Dashboard: React.FC = () => {
             behavior: "smooth",
         })
     }
+
+    const [displayedProducts, setDisplayedProducts] = useState<object[]>([])
+
+    useEffect(() => {
+        setDisplayedProducts(products?.slice(
+            (currentPage - 1) * productsPerPage,
+            currentPage * productsPerPage
+        ))
+    }, [products, currentPage])
+
+
 
     const productNavProps = {
         currentPage,
@@ -172,42 +187,32 @@ const Dashboard: React.FC = () => {
         searchProducts,
         setSearchValue
     }
+    const [clickedProduct, setClickedProduct] = useState({})
+    const dashboardBodyProps = {
+        productNavProps,
+        searchedProducts,
+        searchValue,
+        query,
+        productsAPI,
+        displayedProducts,
+        setClickedProduct,
+        clickedProduct,
+        cardStyle,
+        productTitleStyle,
+        handleAddToCart
+    }
 
     return (
-        <div>
+        <div style={{ height: '100%' }}>
             <Header {...headerProps} />
-            <Navbar />
-            <Slider />
-            <AboutUs />
-            <div style={{ backgroundColor: '#f6f6f6', padding: '5rem 0' }}>
-                <Grid sx={{ maxWidth: 1200, margin: 'auto' }} container spacing={2}>
-                    <Grid size={12}>
-                        <Typography id='products-section' sx={{ textAlign: 'center', transform: 'translateY(-90%)' }} variant="h5">All Products</Typography>
-                    </Grid>
-                    <Grid size={12}>
-                        <ProductNavBar {...productNavProps} />
-                        {searchedProducts.length ? <Typography sx={{ mt: 1.5 }}>Kết quả tìm kiếm cho <span style={{color: 'red'}}>{searchValue}</span></Typography> : null}
-                    </Grid>
-                    {displayedProducts?.map((product: any) => (
-                        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                            <Card>
-                                <CardMedia style={{ backgroundImage: `url(${product.image})` }} sx={cardStyle} />
-                                <CardContent>
-                                    <Typography sx={productTitleStyle} variant="h6">{product.title}</Typography>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                        <Typography variant="subtitle1">${product.price}</Typography>
-                                        <IconButton onClick={() => handleAddToCart(product)} color="primary">
-                                            <AddShoppingCart />
-                                        </IconButton>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </div>
-            <Contact />
+            <Routes>
+                <Route path="/" element={<DashboardBody {...dashboardBodyProps} />} />
+                <Route path='/dashboard/product/:title' element={<ProductInfo product={clickedProduct} addToCart={handleAddToCart} />} />
+            </Routes>
             <Footer />
+            <Routes>
+                <Route path="/admin" element={<Admin />} />
+            </Routes>
         </div>
     );
 };

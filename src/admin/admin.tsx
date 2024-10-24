@@ -1,12 +1,17 @@
 
 import Sidebar from "./components/sidebar"
 import Header from "./components/header"
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import React from "react";
 import routes from './routes.tsx';
+import LoginForm from './components/loginForm'
+import { Typography } from "@mui/material";
+
 const Admin: React.FC = () => {
 
     const [open, setOpenSidebar] = React.useState(true)
+
+    const [showLoginForm, setShowLoginForm] = React.useState(true);
 
     const adminPageStyle = {
         width: '100%',
@@ -20,12 +25,13 @@ const Admin: React.FC = () => {
     }
 
     const contentAreaStyle = {
-        padding: '0 3rem 2rem', 
+        padding: '2rem 1.8rem',
         backgroundColor: '#17181f'
     }
 
     return (
-        <Router>
+        <>
+            <LoginForm open={showLoginForm} setShowLoginForm={setShowLoginForm} />
             <div style={adminPageStyle}>
                 <Sidebar open={open} />
                 <div style={rightSidePageStyle}>
@@ -36,10 +42,11 @@ const Admin: React.FC = () => {
                                 <Route path={route.path} element={<route.component />} />
                             ))}
                         </Routes>
+                        <Typography sx={{ textAlign: 'center', mt: '5rem', color: '#aab8c1' }} variant="body2">Copyright © 2024 NDT Shop. All rights reserved.</Typography>
                     </div>
                 </div>
             </div>
-        </Router>
+        </>
     )
 }
 

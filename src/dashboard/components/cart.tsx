@@ -54,15 +54,16 @@ const Cart: React.FC<CartProps> = ({ cartProducts, open, onClose, setAmount, set
 
     const getcartProductTotal = (cartProductId: number) => {
         const quantity = quantities[cartProductId] || 1;
-        const cartProduct = cartProducts.find((p) => p.id === cartProductId);
+        const cartProduct = cartProducts.find((p) => p.id == cartProductId);
         return cartProduct ? cartProduct.price * quantity : 0;
     };
+
+    const cartTotal = cartProducts?.reduce((total, cartProduct) => total + getcartProductTotal(cartProduct.id), 0);
 
     const itemCounter = (arr: any, value: any) => {
         return arr.filter((x: any) => x.id == value.id).length;
     };
 
-    const cartTotal = cartProducts?.reduce((total, cartProduct) => total + getcartProductTotal(cartProduct.id), 0);
 
     // create unique cartProducts array without duplicated elements 
     let uniqueCartProducts = cartProducts?.filter((value, index, self) =>
@@ -73,14 +74,14 @@ const Cart: React.FC<CartProps> = ({ cartProducts, open, onClose, setAmount, set
 
     return (
         <Drawer anchor="right" open={open} onClose={onClose}>
-            <div style={{ width: 400 }}>
-                <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+            <div style={{ width: 450 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem' }}>
+                    <h2>Giỏ hàng</h2>
                     <IconButton onClick={onClose}>
                         <Close />
                     </IconButton>
                 </div>
-                <h2 style={{ marginLeft: 20 }}>Giỏ hàng</h2>
-                {cartProducts?.length === 0 ? <p style={{ marginLeft: 20 }}>Chưa có sản phẩm nào .</p> : null}
+                {cartProducts?.length === 0 ? <p style={{ marginLeft: '1.5rem' }}>Chưa có sản phẩm nào .</p> : null}
                 <List>
                     {uniqueCartProducts?.map((cartProduct) => (
                         <ListItem>
@@ -115,7 +116,7 @@ const Cart: React.FC<CartProps> = ({ cartProducts, open, onClose, setAmount, set
                         </ListItem>
                     ))}
                 </List>
-                <div style={{ textAlign: 'right', padding: '10px' }}>
+                <div style={{ textAlign: 'right', marginRight: 20 }}>
                     <strong>Tổng cộng: ${cartTotal?.toFixed(2)}</strong>
                 </div>
             </div>
