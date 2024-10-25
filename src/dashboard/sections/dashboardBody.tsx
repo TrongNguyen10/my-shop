@@ -30,7 +30,7 @@ const DashboardBody = (props: any) => {
                     {props.query.error || props.query.isLoading || props.displayedProducts.length ? props.displayedProducts?.map((product: any) => (
                         <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                             <Card className="cardProduct">
-                                <Link onClick={() => props.setClickedProduct(product)} to={`/dashboard/product/${product.title}`} target="_self">
+                                <Link onClick={() => props.setClickedProduct(product)} to={`/my-shop/product/${product.title}`} target="_self">
                                     <CardMedia style={{ backgroundImage: `url(${product.image})` }} sx={props.cardStyle} />
                                 </Link>
                                 <CardContent>
