@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Breadcrumbs, Button, Typography, Card, CardMedia, Grid2, Rating } from '@mui/material';
 import { cardStyle } from './dashboard';
 import { Link } from 'react-router-dom';

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { Apps, Category } from '@mui/icons-material';
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -11,6 +11,7 @@ const Sidebar = (props: any) => {
     const [expanded, setExpanded] = React.useState<string | false>('panel1');
 
     const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+        event = event
         setExpanded(newExpanded ? panel : false);
     };
 

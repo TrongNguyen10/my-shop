@@ -1,7 +1,7 @@
 
 import { productsAPI } from '../../api';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import axios from 'axios';
@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
         console.log(cartProducts)
     }
 
-    const handlePageChange = (event: ChangeEvent, page: number = 1) => {
+    const handlePageChange = (page: number = 1) => {
         setCurrentPage(page);
     };
 

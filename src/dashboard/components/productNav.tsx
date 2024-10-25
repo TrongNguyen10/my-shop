@@ -119,7 +119,7 @@ const ProductNavBar = (props: any) => {
                 </Button>
             </div>
             <Stack>
-                <Pagination count={props.totalPages} page={props.currentPage} onChange={(event, pageNumber) => props.handlePageChange(event, pageNumber)} />
+                <Pagination count={props.totalPages} page={props.currentPage} onChange={(pageNumber) => props.handlePageChange(pageNumber)} />
             </Stack>
         </div>
     );

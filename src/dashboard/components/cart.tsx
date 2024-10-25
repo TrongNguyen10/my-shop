@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Drawer, List, ListItem, ListItemText, IconButton, Box } from '@mui/material';
 import { Close, Add, Remove, Delete } from '@mui/icons-material';
 
@@ -31,7 +31,7 @@ interface CartProps {
 }
 
 const Cart: React.FC<CartProps> = ({ cartProducts, open, onClose, setAmount, setCartProducts }) => {
-    const [quantities, setQuantities] = useState<{ [cartProductId: number]: number }>({});
+    // const [quantities, setQuantities] = useState<{ [cartProductId: number]: number }>({});
 
     const handleIncrease = (cartProduct: any) => {
         cartProducts.push(cartProduct)
@@ -53,9 +53,9 @@ const Cart: React.FC<CartProps> = ({ cartProducts, open, onClose, setAmount, set
     };
 
     const getcartProductTotal = (cartProductId: number) => {
-        const quantity = quantities[cartProductId] || 1;
+        // const quantity = quantities[cartProductId] || 1;
         const cartProduct = cartProducts.find((p) => p.id == cartProductId);
-        return cartProduct ? cartProduct.price * quantity : 0;
+        return cartProduct ? cartProduct.price * 1 : 0;
     };
 
     const cartTotal = cartProducts?.reduce((total, cartProduct) => total + getcartProductTotal(cartProduct.id), 0);

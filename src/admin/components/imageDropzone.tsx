@@ -16,12 +16,6 @@ const ImageDropzone = (props: any) => {
         }
     };
 
-    const handleRemoveImage = () => {
-        setSelectedFile(null);
-        setImageUrl('');
-        props.passImageUrl('')
-    };
-
     return (
         <div>
             <input
@@ -51,11 +45,3 @@ const ImageDropzone = (props: any) => {
 };
 
 export default ImageDropzone;
-// const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     const file = event.target.files?.[0];
-//     if (file) {
-//         // Upload the file and get the image URL
-//         const imageUrl = URL.createObjectURL(file);;
-//         setProduct((prevProduct) => ({ ...prevProduct, image: imageUrl }));
-//     }
-// };
