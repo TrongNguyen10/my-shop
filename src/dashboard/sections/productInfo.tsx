@@ -33,7 +33,7 @@ const ProductInfo = (props: any) => {
             <div style={{ marginBottom: 30 }}>
                 <Typography sx={{ mb: 1 }} variant="h5">Product Details</Typography>
                 <Breadcrumbs aria-label="breadcrumb">
-                    <Link style={{ textDecoration: 'none' }} to='/'>
+                    <Link style={{ textDecoration: 'none' }} to='/my-shop/'>
                         <Typography color="primary">Home</Typography>
                     </Link>
                     <Typography color="textDisabled">Product Details</Typography>
