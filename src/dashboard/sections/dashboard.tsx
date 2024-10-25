@@ -5,10 +5,9 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import axios from 'axios';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import ProductInfo from './productInfo';
 import DashboardBody from './dashboardBody';
-import Admin from '../../admin/admin';
 
 export const cardStyle = {
     paddingTop: '100%',
