@@ -210,9 +210,6 @@ const Dashboard: React.FC = () => {
                 <Route path='/dashboard/product/:title' element={<ProductInfo product={clickedProduct} addToCart={handleAddToCart} />} />
             </Routes>
             <Footer />
-            <Routes>
-                <Route path="/admin" element={<Admin />} />
-            </Routes>
         </div>
     );
 };

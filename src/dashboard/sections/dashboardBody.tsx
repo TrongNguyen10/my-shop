@@ -25,12 +25,12 @@ const DashboardBody = (props: any) => {
                     </Grid2>
 
                     {props.query.error ? <h3 style={{ margin: '2.5rem auto 0', color: '#d32f2f' }}>Failed to load data, please reload page !</h3> : null}
-                    {props.query.isLoading ? <div style={{ margin: '2.5rem auto 0' }}><h3>Loading products, please wait a few seconds...</h3> hoặc <a href={props.productsAPI} target='_blank'>Bấm vào đây</a></div> : null}
+                    {props.query.isLoading ? <div style={{ margin: '2.5rem auto 0' }}><h3>Loading products, please wait a few seconds...</h3></div> : null}
 
                     {props.query.error || props.query.isLoading || props.displayedProducts.length ? props.displayedProducts?.map((product: any) => (
                         <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                             <Card className="cardProduct">
-                                <Link onClick={() => props.setClickedProduct(product)} to={`/dashboard/product/${product.title}`}>
+                                <Link onClick={() => props.setClickedProduct(product)} to={`/dashboard/product/${product.title}`} target="_self">
                                     <CardMedia style={{ backgroundImage: `url(${product.image})` }} sx={props.cardStyle} />
                                 </Link>
                                 <CardContent>
