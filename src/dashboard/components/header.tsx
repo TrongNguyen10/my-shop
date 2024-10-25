@@ -51,7 +51,7 @@ const Header = (props: any) => {
         <AppBar style={{ backgroundColor: '#212121', position: 'sticky', boxShadow: 'none' }}>
             <Toolbar sx={toolBarStyle}>
                 <Link to="#" smooth={true} duration={500}>
-                    <img style={{ maxHeight: 40, marginRight: 20 }} src="/src/dashboard/assets/logo3.png" alt="" />
+                    <img style={{ maxHeight: 40, marginRight: 20 }} src="src/dashboard/assets/logo3.png" alt="" />
                 </Link>
                 <Typography variant="h6" style={{ color: '#FFFFFF' }}>
                     NDT SHOP
