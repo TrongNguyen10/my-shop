@@ -1,6 +1,5 @@
 {
-    "homepage": "https://github.com/TrongNguyen10/my-shop",
-    "name": "my-shop",
+    "name": "ecommerce",
     "private": true,
     "version": "0.0.0",
     "type": "module",
