@@ -5,10 +5,10 @@ import AddProduct from './routes/addProduct';
 import AddCategory from './routes/addCategory';
 
 const routes = [
-  { path: '/productList', component: ProductList },
-  { path: '/categoryList', component: CategoryList },
-  { path: '/addProduct', component: AddProduct },
-  { path: '/addCategory', component: AddCategory },
+  { path: '/my-shop/admin/productList', component: ProductList },
+  { path: '/my-shop/admin/categoryList', component: CategoryList },
+  { path: '/my-shop/admin/addProduct', component: AddProduct },
+  { path: '/my-shop/admin/addCategory', component: AddCategory },
   
 ];
 

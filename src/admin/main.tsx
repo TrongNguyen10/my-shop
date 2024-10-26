@@ -6,14 +6,14 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
-import AdminPage from './routes/adminPage.tsx';
+import Admin from './admin.tsx';
 const queryClient = new QueryClient()
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById('admin')!).render(
     <BrowserRouter>
         <StrictMode>
             <QueryClientProvider client={queryClient}>
-                <AdminPage />
+                <Admin />
             </QueryClientProvider>
         </StrictMode>
     </BrowserRouter>
