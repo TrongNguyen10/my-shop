@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 import ProductInfo from './productInfo';
 import DashboardBody from './dashboardBody';
+import Admin from '../../admin/admin';
 
 export const cardStyle = {
     paddingTop: '100%',
@@ -205,7 +206,7 @@ const Dashboard: React.FC = () => {
         <div style={{ height: '100%' }}>
             <Header {...headerProps} />
             <Routes>
-                <Route path="/my-shop" element={<DashboardBody {...dashboardBodyProps} />} />
+                <Route path="/my-shop/" element={<DashboardBody {...dashboardBodyProps} />} />
                 <Route path='/my-shop/product/:title' element={<ProductInfo product={clickedProduct} addToCart={handleAddToCart} />} />
             </Routes>
             <Footer />

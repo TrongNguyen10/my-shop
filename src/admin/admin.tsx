@@ -30,7 +30,7 @@ const Admin: React.FC = () => {
     }
 
     return (
-        <>
+        <div>
             <LoginForm open={showLoginForm} setShowLoginForm={setShowLoginForm} />
             <div style={adminPageStyle}>
                 <Sidebar open={open} />
@@ -46,7 +46,7 @@ const Admin: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

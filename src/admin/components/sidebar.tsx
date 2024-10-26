@@ -88,12 +88,12 @@ const Sidebar = (props: any) => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <List>
-                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/admin/productList'>
+                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/my-shop/admin/productList'>
                                     <ListItem>
                                         <ListItemText primary="List" />
                                     </ListItem>
                                 </NavLink>
-                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/admin/addProduct'>
+                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/my-shop/admin/addProduct'>
                                     <ListItem>
                                         <ListItemText primary="Create" />
                                     </ListItem>
@@ -113,12 +113,12 @@ const Sidebar = (props: any) => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <List>
-                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/admin/categoryList'>
+                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/my-shop/admin/categoryList'>
                                     <ListItem>
                                         <ListItemText primary="List" />
                                     </ListItem>
                                 </NavLink>
-                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/admin/addCategory'>
+                                <NavLink className={({ isActive }) => (isActive ? 'linkTag active' : 'linkTag inactive')} to='/my-shop/admin/addCategory'>
                                     <ListItem>
                                         <ListItemText primary="Create" />
                                     </ListItem>
