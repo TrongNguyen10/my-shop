@@ -8,7 +8,6 @@ import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 import ProductInfo from './productInfo';
 import DashboardBody from './dashboardBody';
-import Admin from '../../admin/admin';
 
 export const cardStyle = {
     paddingTop: '100%',
