@@ -51,7 +51,7 @@ const Header = (props: any) => {
         <AppBar style={{ backgroundColor: '#212121', position: 'sticky', boxShadow: 'none' }}>
             <Toolbar sx={toolBarStyle}>
                 <Link to="#" smooth={true} duration={500}>
-                    <img style={{ maxHeight: 40, marginRight: 20 }} src="https://photos.fife.usercontent.google.com/pw/AP1GczOGPTFCr2OCvfpVTYvJG4wiYS0gO3FXP134QwGT7UZIt3u-d2yEARw=w512-h512-s-no-gm?authuser=1" alt="logo" />
+                    <img style={{ maxHeight: 40, marginRight: 20 }} src="https://private-user-images.githubusercontent.com/83052755/380417031-f97718e2-96f9-4ad8-8c58-ed743e1b0f51.JPG?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjk5NjA1NjAsIm5iZiI6MTcyOTk2MDI2MCwicGF0aCI6Ii84MzA1Mjc1NS8zODA0MTcwMzEtZjk3NzE4ZTItOTZmOS00YWQ4LThjNTgtZWQ3NDNlMWIwZjUxLkpQRz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEwMjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMDI2VDE2MzEwMFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTFiZjYzYmE0Y2Y1ZDFkN2NjODJkYjU5M2M1MGZkNDQ1NzAzYWNjY2M2ZTdjYmUyZWEwNjcyODY3YmMzZWU5ZWEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.wNi26oCuIGqUK9rQ_qVOrjTbLYs0EBlPBn43F-Vo-es" alt="logo" />
                 </Link>
                 <Typography variant="h6" style={{ color: '#FFFFFF' }}>
                     NDT SHOP
