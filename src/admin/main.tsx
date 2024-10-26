@@ -9,7 +9,7 @@ import {
 import Admin from './admin.tsx';
 const queryClient = new QueryClient()
 
-createRoot(document.getElementById('admin')!).render(
+createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
         <StrictMode>
             <QueryClientProvider client={queryClient}>

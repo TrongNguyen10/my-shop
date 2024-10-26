@@ -205,8 +205,8 @@ const Dashboard: React.FC = () => {
         <div style={{ height: '100%' }}>
             <Header {...headerProps} />
             <Routes>
-                <Route path="/my-shop/" element={<DashboardBody {...dashboardBodyProps} />} />
-                <Route path='/my-shop/product/:title' element={<ProductInfo product={clickedProduct} addToCart={handleAddToCart} />} />
+                <Route path="/" element={<DashboardBody {...dashboardBodyProps} />} />
+                <Route path='/product/:title' element={<ProductInfo product={clickedProduct} addToCart={handleAddToCart} />} />
             </Routes>
             <Footer />
         </div>
