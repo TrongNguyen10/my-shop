@@ -5,9 +5,9 @@ import { Link } from 'react-scroll';
 import { Button, Typography } from '@mui/material'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
-const images = ["src/dashboard/assets/img1.JPG",
-    "src/dashboard/assets/img3.JPG",
-    "src/dashboard/assets/img2.JPG"]; 
+const images = ["./src/dashboard/assets/img1.JPG",
+    "./src/dashboard/assets/img3.JPG",
+    "./src/dashboard/assets/img2.JPG"]; 
 
 const Slider: React.FC = () => {
 
