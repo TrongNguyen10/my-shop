@@ -10,7 +10,7 @@ import {
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
-    <BrowserRouter>
+    <BrowserRouter basename='my-shop'>
         <StrictMode>
             <QueryClientProvider client={queryClient}>
                 <App />
