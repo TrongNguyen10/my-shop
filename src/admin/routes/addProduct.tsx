@@ -181,6 +181,8 @@ const AddProduct: React.FC = () => {
                                         className='inputTag'
                                         placeholder="Rate"
                                         name="rate"
+                                        min={0}
+                                        max={5}
                                         type="number"
                                         defaultValue={product.rating.rate}
                                         onChange={handleInputChange}
@@ -194,6 +196,7 @@ const AddProduct: React.FC = () => {
                                         className='inputTag'
                                         placeholder="Price"
                                         name="price"
+                                        min={0}
                                         type="number"
                                         defaultValue={product.price}
                                         onChange={handleInputChange}
@@ -206,6 +209,7 @@ const AddProduct: React.FC = () => {
                                         className='inputTag'
                                         placeholder="Quantity"
                                         name="count"
+                                        min={0}
                                         type="number"
                                         defaultValue={product.rating.count}
                                         onChange={handleInputChange}

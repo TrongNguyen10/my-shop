@@ -8,8 +8,8 @@ function App() {
 
     return (
         <Routes>
-            <Route path='/my-shop/*' element={<Dashboard />} />
-            <Route path='/my-shop/admin/*' element={<Admin />} />
+            <Route path='/*' element={<Dashboard />} />
+            <Route path='/admin/*' element={<Admin />} />
         </Routes>
     )
 }

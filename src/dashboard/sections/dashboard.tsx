@@ -57,6 +57,7 @@ const Dashboard: React.FC = () => {
         if (query.data) {
             setProducts(query.data);
             setAllProducts(query.data)
+            setCategoryProducts(query.data)
         }
     }, [query.data]);
 
@@ -74,7 +75,8 @@ const Dashboard: React.FC = () => {
         console.log(cartProducts)
     }
 
-    const handlePageChange = (page: number = 1) => {
+    const handlePageChange = (e: any, page: number = 1) => {
+        e = e
         setCurrentPage(page);
     };
 
@@ -114,23 +116,28 @@ const Dashboard: React.FC = () => {
     }
 
     const filterByPriceRange = (minPrice: any, maxPrice: any, arr: any) => {
+
+        setMinPrice(minPrice)
+        setMaxPrice(maxPrice)
+
         filteredProducts = arr || (!!searchValue ? searchedProducts : categoryProducts)
 
-        if (minPrice || maxPrice) {
-            if (!minPrice) {
+        if ((minPrice != '' || maxPrice != '') && (minPrice != '.' && maxPrice != '.')) {
+            if (minPrice && maxPrice) {
                 filteredProducts = filteredProducts.filter((product: any) => {
-                    return product.price <= maxPrice
+                    return product.price >= Number(minPrice) && product.price <= Number(maxPrice)
                 })
-            } else if (!maxPrice) {
+            } else if (minPrice) {
                 filteredProducts = filteredProducts.filter((product: any) => {
-                    return product.price >= minPrice
+                    return product.price >= Number(minPrice)
                 })
-            } else {
+            } else if (maxPrice) {
                 filteredProducts = filteredProducts.filter((product: any) => {
-                    return product.price >= minPrice && product.price <= maxPrice
+                    return product.price <= Number(maxPrice)
                 })
             }
         }
+
         filterByPrice(priceOrder, filteredProducts)
     }
 
@@ -176,6 +183,8 @@ const Dashboard: React.FC = () => {
         setPriceOrder,
         setMinPrice,
         setMaxPrice,
+        minPrice,
+        maxPrice
     };
 
     const headerProps = {

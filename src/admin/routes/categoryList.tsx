@@ -13,14 +13,14 @@ const categoryListStyle = {
 
 const tableStyle = {
     maxHeight: 500,
-    // table rows
-    '& .css-10ukr6t-MuiTableCell-root': {
+    // table header
+    '& .MuiTableCell-head': {
+        backgroundColor: '#252630',
         color: '#aab8c1',
         textAlign: 'center'
     },
-    // table header
-    '& .css-1u6ck2-MuiTableCell-root': {
-        backgroundColor: '#252630',
+    // table body
+    '& .MuiTableCell-body': {
         color: '#aab8c1',
         textAlign: 'center'
     },
@@ -197,7 +197,7 @@ const CategoryList: React.FC = () => {
             <TableContainer sx={tableStyle}>
                 <form onSubmit={handleUpdateClick}>
                     <Table stickyHeader>
-                        <TableHead sx={tableStyle}>
+                        <TableHead>
                             <TableRow>
                                 <TableCell>Order</TableCell>
                                 <TableCell>Categories</TableCell>

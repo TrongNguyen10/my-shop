@@ -22,17 +22,17 @@ export const editRowStyle = {
     }
 }
 
-const tableStyle = {
+export const tableStyle = {
     maxHeight: 500,
-    // table rows
-    '& .css-10ukr6t-MuiTableCell-root': {
-        color: '#aab8c1',
-    },
     // table header
-    '& .css-1u6ck2-MuiTableCell-root': {
+    '& .MuiTableCell-head': {
         backgroundColor: '#252630',
         color: '#aab8c1',
         textAlign: 'center'
+    },
+    // table body
+    '& .MuiTableCell-body': {
+        color: '#aab8c1',
     },
 }
 
@@ -192,7 +192,7 @@ const ProductList: React.FC = () => {
             <TableContainer sx={tableStyle}>
                 <form onSubmit={handleUpdateClick}>
                     <Table stickyHeader>
-                        <TableHead sx={tableStyle}>
+                        <TableHead>
                             <TableRow>
                                 <TableCell>ID</TableCell>
                                 <TableCell>Image</TableCell> {/* Cột hình ảnh */}

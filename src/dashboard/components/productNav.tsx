@@ -38,38 +38,30 @@ const ProductNavBar = (props: any) => {
     }
 
     const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (isNumberKey(event)) {
-            setMinPrice(event.target.value);
-            props.setMinPrice(event.target.value)
-        }
+        setMinPrice(event.target.value);
+        props.setMinPrice(event.target.value);
+
     };
 
     const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (isNumberKey(event)) {
-            setMaxPrice(event.target.value);
-            props.setMaxPrice(event.target.value);
-        }
+        setMaxPrice(event.target.value);
+        props.setMaxPrice(event.target.value);
     };
 
-    function isNumberKey(e: any) {
-        const re = /^[0-9\b]+$/;
+    function isValidValue(minPrice: string, maxPrice: string) {
+        if (!minPrice && !maxPrice) return false
 
-        // if value is not blank, then test the regex
+        if (minPrice == '.' || maxPrice == '.') return false
 
-        if (e.target.value === '' || re.test(e.target.value)) {
-            return true
-        }
-        return false;
+        if (maxPrice != '' && Number(minPrice) > Number(maxPrice)) return false
+
+        return true;
     }
 
     const applyFilter = () => {
-        if (!!minPrice && !!maxPrice) {
-            if (Number(maxPrice) - Number(minPrice) >= 0) {
-                props.filterByPriceRange(Number(minPrice), Number(maxPrice))
-            }
-        } else if (!!minPrice || !!maxPrice) {
+        if (isValidValue(minPrice, maxPrice)) {
             props.filterByPriceRange(minPrice, maxPrice)
-        }
+        } else alert('Vui lòng nhập giá trị hợp lệ')
     };
 
     useEffect(() => {
@@ -81,7 +73,7 @@ const ProductNavBar = (props: any) => {
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <p style={{ marginRight: 15 }}>Danh mục :</p>
                 <Select
-                    sx={{height: 50}}
+                    sx={{ height: 50 }}
                     labelId="category-label"
                     id="category-select"
                     value={category}
@@ -98,7 +90,7 @@ const ProductNavBar = (props: any) => {
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <p style={{ marginRight: 15 }}>Khoảng giá :</p>
                 <Select
-                    sx={{height: 50}}
+                    sx={{ height: 50 }}
                     labelId="price-order-label"
                     id="price-order-select"
                     value={priceOrder}
@@ -111,15 +103,15 @@ const ProductNavBar = (props: any) => {
             </div>
             <span>hoặc</span>
             <div>
-                <input type='text' style={{ width: 70, height: 30 }} placeholder="TỪ" value={minPrice} onChange={handleMinPriceChange} />
+                <input type='number' min={0} style={{ width: 70, height: 30 }} defaultValue={props.minPrice} placeholder="TỪ" onChange={handleMinPriceChange} />
                 <span style={{ margin: '0 5px' }}> - </span>
-                <input type='text' style={{ width: 70, height: 30 }} placeholder="ĐẾN" value={maxPrice} onChange={handleMaxPriceChange} />
+                <input type='number' min={0} style={{ width: 70, height: 30 }} defaultValue={props.maxPrice} placeholder="ĐẾN" onChange={handleMaxPriceChange} />
                 <Button sx={{ height: 30, ml: 2 }} variant="contained" color="error" onClick={applyFilter}>
                     Lọc
                 </Button>
             </div>
             <Stack>
-                <Pagination count={props.totalPages} page={props.currentPage} onChange={(pageNumber) => props.handlePageChange(pageNumber)} />
+                <Pagination count={props.totalPages} page={props.currentPage} onChange={(e, pageNumber) => props.handlePageChange(e, pageNumber)} />
             </Stack>
         </div>
     );

@@ -80,6 +80,7 @@ const AddCategory: React.FC = () => {
                                             className='inputTag'
                                             placeholder="From"
                                             name="minPrice"
+                                            min={0}
                                             type="number"
                                             defaultValue={category.minPrice}
                                             onChange={handleInputChange}
@@ -90,6 +91,7 @@ const AddCategory: React.FC = () => {
                                             className='inputTag'
                                             placeholder="To"
                                             name="maxPrice"
+                                            min={0}
                                             type="number"
                                             defaultValue={category.maxPrice}
                                             onChange={handleInputChange}
@@ -104,6 +106,7 @@ const AddCategory: React.FC = () => {
                                         className='inputTag'
                                         placeholder="Total products"
                                         name="totalProducts"
+                                        min={0}
                                         type="number"
                                         defaultValue={category.totalProducts}
                                         onChange={handleInputChange}
@@ -116,6 +119,7 @@ const AddCategory: React.FC = () => {
                                         className='inputTag'
                                         placeholder="Quantity"
                                         name="totalQuantity"
+                                        min={0}
                                         type="number"
                                         defaultValue={category.totalQuantity}
                                         onChange={handleInputChange}
