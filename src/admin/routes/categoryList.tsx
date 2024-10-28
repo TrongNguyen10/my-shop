@@ -146,7 +146,7 @@ const CategoryList: React.FC = () => {
 
     const handleUpdateClick = (e: any) => {
         e.preventDefault()
-        if(!newCategory.trim()) {
+        if (!newCategory.trim()) {
             alert('Vui lòng điền đầy đủ thông tin !')
             return
         }
@@ -173,8 +173,8 @@ const CategoryList: React.FC = () => {
             }
             alert('Cập nhật danh mục mới cho sản phẩm thành công. Vui lòng kiểm tra danh sách sản phẩm !')
             productsQuery.refetch()
-        } catch (error) {
-            console.error('Có lỗi xảy ra:', error);
+        } catch {
+            alert('Có lỗi xảy ra !');
         }
     }
 

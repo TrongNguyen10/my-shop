@@ -26,7 +26,6 @@ const ProductInfo = (props: any) => {
             productArr.push(product)
         }
         props.addToCart(productArr)
-        productArr = []
     };
     return (
         <div style={{ padding: '3rem' }}>

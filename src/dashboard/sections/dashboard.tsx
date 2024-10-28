@@ -72,7 +72,6 @@ const Dashboard: React.FC = () => {
         Array.isArray(product) ? cartProducts?.push(...product) : cartProducts?.push(product)
         setCartProducts(cartProducts)
         setAmount(cartProducts?.length)
-        console.log(cartProducts)
     }
 
     const handlePageChange = (e: any, page: number = 1) => {
@@ -82,6 +81,7 @@ const Dashboard: React.FC = () => {
 
     var filteredProducts = [];
     const filterByCategory = (category: string) => {
+        setCurrentPage(1)
         setCategory(category)
         if (category == 'category-all') {
             filteredProducts = allProducts
@@ -109,7 +109,7 @@ const Dashboard: React.FC = () => {
             }
         }
         setProducts(filteredProducts)
-        setDisplayedProducts(products?.slice(
+        setDisplayedProducts(filteredProducts?.slice(
             (currentPage - 1) * productsPerPage,
             currentPage * productsPerPage
         ))
@@ -147,6 +147,8 @@ const Dashboard: React.FC = () => {
             filterByCategory(category)
             return
         }
+
+        setCurrentPage(1)
 
         filteredProducts = allProducts.filter((product: any) => {
             return product.title.toLowerCase().includes(searchValue.toLowerCase()) ||
