@@ -183,7 +183,7 @@ const ProductList: React.FC = () => {
                     </IconButton>
                     <input onKeyUp={pressEnterToSearch} onChange={handleSetSearchValue} value={searchValue} style={{ padding: '0.5rem 2.5rem', backgroundColor: '#1e1f27', color: '#fff', border: '1px solid #999' }} placeholder="Search" /> {/* Thanh tìm kiếm */}
                 </div>
-                <Link to="/addProduct">
+                <Link to="/admin/addProduct">
                     <Button variant="contained" color="primary">
                         Add Product
                     </Button>
